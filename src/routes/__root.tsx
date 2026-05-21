@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -72,19 +74,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Alok Singh — Backend & Full Stack Developer" },
+      {
+        name: "description",
+        content:
+          "Portfolio of Alok Singh — Software Engineering student at KIIT building scalable backends, REST APIs and AI-powered full stack products.",
+      },
+      { name: "author", content: "Alok Singh" },
+      { name: "keywords", content: "Alok Singh, Software Engineer, Backend Developer, Full Stack, Node.js, React, FastAPI, PostgreSQL, KIIT, Portfolio" },
+      { property: "og:title", content: "Alok Singh — Backend & Full Stack Developer" },
+      {
+        property: "og:description",
+        content:
+          "Software Engineering student building scalable backends, REST APIs and AI-powered full stack products.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Alok Singh — Backend & Full Stack Developer" },
+      {
+        name: "twitter:description",
+        content: "Scalable backends, REST APIs and AI-powered full stack products.",
+      },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      { rel: "canonical", href: "/" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
       },
     ],
   }),
@@ -113,7 +136,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <ThemeProvider>
+        <Outlet />
+        <Toaster richColors position="top-center" />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
